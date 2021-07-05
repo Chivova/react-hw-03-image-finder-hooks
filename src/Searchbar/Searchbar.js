@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function Searchbar() {
+export default function Searchbar({ onSubmit }) {
   const [query, setQeury] = useState('');
 
   const handleSearchQuery = e => {
@@ -11,6 +11,7 @@ export default function Searchbar() {
   const handleSubmit = e => {
     e.preventDefault();
 
+    onSubmit(query);
     setQeury('');
   };
   return (

@@ -1,15 +1,23 @@
-// import {useState} from 'react'
+import { Fragment, useState } from 'react';
 import Searchbar from './Searchbar';
+import SearchInfo from './SearchInfo';
 
 import './App.css';
 import 'modern-normalize/modern-normalize.css';
 
 function App() {
-  // const [imageQuery, setImageQuery] = useState('')
+  const [imageQuery, setImageQuery] = useState('');
 
-  // const handleFormSubmit =()=>{}
+  const handleFormSubmit = query => {
+    setImageQuery(query);
+  };
 
-  return <Searchbar></Searchbar>;
+  return (
+    <Fragment>
+      <Searchbar onSubmit={handleFormSubmit}></Searchbar>
+      <SearchInfo imageQuery={imageQuery} />
+    </Fragment>
+  );
 }
 
 export default App;
