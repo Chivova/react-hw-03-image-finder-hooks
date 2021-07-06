@@ -1,9 +1,17 @@
 import ImageGalleryItem from '../ImageGalleryItem';
 
-export default function ImageGallery() {
+export default function ImageGallery({ gallery }) {
+  console.log(gallery);
   return (
     <ul>
-      <ImageGalleryItem />
+      {gallery.map(({ id, webformatURL, largeImageURL, tags }) => (
+        <ImageGalleryItem
+          key={id}
+          webformatURL={webformatURL}
+          largeImageURL={largeImageURL}
+          tags={tags}
+        />
+      ))}
     </ul>
   );
 }
