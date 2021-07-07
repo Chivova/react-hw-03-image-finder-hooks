@@ -1,4 +1,5 @@
 import { Fragment, useState } from 'react';
+import { ToastContainer } from 'react-toastify';
 import Searchbar from './Searchbar';
 import SearchInfo from './SearchInfo';
 
@@ -14,6 +15,7 @@ function App() {
 
   return (
     <Fragment>
+      <ToastContainer />
       <Searchbar onSubmit={handleFormSubmit}></Searchbar>
       <SearchInfo imageQuery={imageQuery} />
     </Fragment>
