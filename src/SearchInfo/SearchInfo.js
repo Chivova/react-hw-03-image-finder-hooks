@@ -31,10 +31,7 @@ export default function SearchInfo({ imageQuery }) {
             autoClose: 3000,
           });
         }
-
         setGallery(state => [...state, ...gallery]);
-
-        // setLoading(false);
       })
       .finally(() => {
         setLoading(false);
@@ -48,7 +45,7 @@ export default function SearchInfo({ imageQuery }) {
 
   const scroll = () => {
     window.scrollTo({
-      top: document.documentElement.scrollHeight - 1500,
+      top: document.documentElement.scrollHeight,
       behavior: 'smooth',
     });
   };
@@ -59,7 +56,7 @@ export default function SearchInfo({ imageQuery }) {
         <Loader type="TailSpin" color="#00BFFF" height={50} width={50} />
       )}
       <ImageGallery gallery={gallery} />
-      <Button onClick={updatePage} />
+      {gallery.length > 1 && <Button onClick={updatePage} />}
     </Fragment>
   );
 }
