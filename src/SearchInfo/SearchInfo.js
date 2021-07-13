@@ -31,7 +31,6 @@ export default function SearchInfo({ imageQuery }) {
             autoClose: 3000,
           });
         }
-
         setGallery(state =>
           page === 1 ? [...response] : [...state, ...response],
         );
@@ -48,17 +47,17 @@ export default function SearchInfo({ imageQuery }) {
 
   const scroll = () => {
     window.scrollTo({
-      top: document.documentElement.scrollHeight - 1500,
+      top: document.documentElement.scrollHeight,
       behavior: 'smooth',
     });
   };
 
   return (
     <Fragment>
-      <ImageGallery gallery={gallery} />
       {loading && (
         <Loader type="TailSpin" color="#00BFFF" height={50} width={50} />
       )}
+      <ImageGallery gallery={gallery} />
       {gallery.length > 1 && <Button onClick={updatePage} />}
     </Fragment>
   );
