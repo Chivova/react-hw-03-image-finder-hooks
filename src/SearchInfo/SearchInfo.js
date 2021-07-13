@@ -22,8 +22,8 @@ export default function SearchInfo({ imageQuery }) {
 
     imgApi
       .fetchImgApi(imageQuery, page)
-      .then(gallery => {
-        if (gallery.length === 0) {
+      .then(response => {
+        if (response.length === 0) {
           setError(`No images found on your request ${imageQuery}`);
 
           toast.error(error, {
@@ -32,9 +32,9 @@ export default function SearchInfo({ imageQuery }) {
           });
         }
 
-        setGallery(state => [...state, ...gallery]);
-
-        // setLoading(false);
+        setGallery(state =>
+          page === 1 ? [...response] : [...state, ...response],
+        );
       })
       .finally(() => {
         setLoading(false);
@@ -55,11 +55,11 @@ export default function SearchInfo({ imageQuery }) {
 
   return (
     <Fragment>
+      <ImageGallery gallery={gallery} />
       {loading && (
         <Loader type="TailSpin" color="#00BFFF" height={50} width={50} />
       )}
-      <ImageGallery gallery={gallery} />
-      <Button onClick={updatePage} />
+      {gallery.length > 1 && <Button onClick={updatePage} />}
     </Fragment>
   );
 }
