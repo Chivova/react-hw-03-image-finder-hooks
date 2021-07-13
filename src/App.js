@@ -9,16 +9,18 @@ import 'modern-normalize/modern-normalize.css';
 
 function App() {
   const [imageQuery, setImageQuery] = useState('');
+  const [page, setPage] = useState(1);
 
-  const handleFormSubmit = query => {
+  const handleFormSubmit = (query, page) => {
     setImageQuery(query);
+    setPage(page);
   };
 
   return (
     <Fragment>
       <ToastContainer />
       <Searchbar onSubmit={handleFormSubmit}></Searchbar>
-      <SearchInfo imageQuery={imageQuery} />
+      <SearchInfo imageQuery={imageQuery} page={page} />
     </Fragment>
   );
 }

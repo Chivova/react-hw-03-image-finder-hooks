@@ -7,9 +7,9 @@ import { toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function SearchInfo({ imageQuery }) {
+export default function SearchInfo({ imageQuery, page }) {
   const [gallery, setGallery] = useState([]);
-  const [page, setPage] = useState(1);
+  // const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -17,7 +17,7 @@ export default function SearchInfo({ imageQuery }) {
     if (imageQuery === '') {
       return;
     }
-
+    console.log(page);
     setLoading(true);
 
     imgApi
@@ -42,7 +42,7 @@ export default function SearchInfo({ imageQuery }) {
   }, [imageQuery, error, page]);
 
   const updatePage = () => {
-    setPage(page => page + 1);
+    // setPage(page => page + 1);
   };
 
   const scroll = () => {

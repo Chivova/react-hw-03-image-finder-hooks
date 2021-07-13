@@ -6,11 +6,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import s from './Searchbar.module.css';
 
 export default function Searchbar({ onSubmit }) {
-  const [query, setQeury] = useState('');
+  const [query, setQuery] = useState('');
+  const [page, setPage] = useState(1);
 
   const handleSearchQuery = e => {
     const { value } = e.target;
-    setQeury(value);
+    setQuery(value);
   };
 
   const handleSubmit = e => {
@@ -24,8 +25,10 @@ export default function Searchbar({ onSubmit }) {
 
       return;
     }
-    onSubmit(query);
-    setQeury('');
+
+    setPage(1);
+    onSubmit(query, page);
+    setQuery('');
   };
   return (
     <header className={s.searchbar}>
