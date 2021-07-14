@@ -7,21 +7,20 @@ import { toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function SearchInfo({ imageQuery, page }) {
+export default function SearchInfo({ imageQuery, startPage }) {
   const [gallery, setGallery] = useState([]);
-  // const [page, setPage] = useState(1);
+  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (imageQuery === '') {
+    if (imageQuery === '' || startPage !== 1) {
       return;
     }
-    console.log(page);
+    setPage(1);
     setLoading(true);
-
     imgApi
-      .fetchImgApi(imageQuery, page)
+      .fetchImgApi(imageQuery, startPage)
       .then(response => {
         if (response.length === 0) {
           setError(`No images found on your request ${imageQuery}`);
@@ -31,23 +30,38 @@ export default function SearchInfo({ imageQuery, page }) {
             autoClose: 3000,
           });
         }
-        setGallery(state =>
-          page === 1 ? [...response] : [...state, ...response],
-        );
+        setGallery([...response]);
+      })
+      .finally(() => {
+        setLoading(false);
+        // scroll();
+      });
+  }, [imageQuery, error, startPage]);
+
+  useEffect(() => {
+    if (imageQuery === '' || page === 1) {
+      return;
+    }
+    setLoading(true);
+
+    imgApi
+      .fetchImgApi(imageQuery, page)
+      .then(response => {
+        setGallery(state => [...state, ...response]);
       })
       .finally(() => {
         setLoading(false);
         scroll();
       });
-  }, [imageQuery, error, page]);
+  }, [imageQuery, page]);
 
   const updatePage = () => {
-    // setPage(page => page + 1);
+    setPage(page => page + 1);
   };
 
   const scroll = () => {
     window.scrollTo({
-      top: document.documentElement.scrollHeight,
+      top: document.documentElement.scrollHeight - 1500,
       behavior: 'smooth',
     });
   };

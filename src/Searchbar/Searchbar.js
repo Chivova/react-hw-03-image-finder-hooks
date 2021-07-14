@@ -7,7 +7,7 @@ import s from './Searchbar.module.css';
 
 export default function Searchbar({ onSubmit }) {
   const [query, setQuery] = useState('');
-  const [page, setPage] = useState(1);
+  const [startPage, setStartPage] = useState(1);
 
   const handleSearchQuery = e => {
     const { value } = e.target;
@@ -26,8 +26,8 @@ export default function Searchbar({ onSubmit }) {
       return;
     }
 
-    setPage(1);
-    onSubmit(query, page);
+    setStartPage(1);
+    onSubmit(query, startPage);
     setQuery('');
   };
   return (
