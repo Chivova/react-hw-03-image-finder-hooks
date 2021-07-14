@@ -68,10 +68,10 @@ export default function SearchInfo({ imageQuery, startPage }) {
 
   return (
     <Fragment>
+      <ImageGallery gallery={gallery} />
       {loading && (
         <Loader type="TailSpin" color="#00BFFF" height={50} width={50} />
       )}
-      <ImageGallery gallery={gallery} />
       {gallery.length > 1 && <Button onClick={updatePage} />}
     </Fragment>
   );
